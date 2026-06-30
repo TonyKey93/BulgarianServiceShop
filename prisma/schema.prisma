@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum RepairStatus {
+  PRIET
+  CHAKA_CHASTI
+  GOTOV
+  IZADEN
+}
+
+model Repair {
+  id            Int          @id @default(autoincrement())
+  clientName    String
+  clientPhone   String
+  device        String
+  defectNotes   String
+  dateReceived  DateTime     @default(now())
+  price         Float?
+  status        RepairStatus @default(PRIET)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
